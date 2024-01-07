@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
+
+    ndkVersion "26.1.10909125"
 
     namespace 'org.strongswan.android'
 
     defaultConfig {
         applicationId "org.strongswan.android"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 80
         versionName "2.4.2"
     }
@@ -19,12 +21,12 @@ android {
 
     task buildNative(type: Exec) {
         workingDir 'src/main/jni'
-        commandLine "${android.ndkDirectory}/ndk-build", '-j', Runtime.runtime.availableProcessors()
+        commandLine "D:\\Sdk\\ndk\\26.1.10909125\\ndk-build.cmd", '-j', Runtime.runtime.availableProcessors()
     }
 
     task cleanNative(type: Exec) {
         workingDir 'src/main/jni'
-        commandLine "${android.ndkDirectory}/ndk-build", 'clean'
+        commandLine "D:\\Sdk\\ndk\\26.1.10909125\\ndk-build.cmd", 'clean'
     }
 
     tasks.withType(JavaCompile) {
@@ -40,6 +42,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
@@ -47,10 +50,10 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.preference:preference:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:3.11.2'
     testImplementation 'org.powermock:powermock-core:2.0.9'
